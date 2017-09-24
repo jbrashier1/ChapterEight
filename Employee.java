@@ -1,16 +1,18 @@
 /**
- * Created by jackbrashier on 9/22/17.
+ * Author: Jack Brashier
+ * Date: 09/20/2017
+ * Purpose: To demonstrate understanding of two-dimensional arrays in Java.
  */
 public class Employee {
-    private String name;
-    private int empID;
+    /**
+     * @param hours an array of the hours worked each day of the week, monday is index 0 and sunday is index 6.
+     * @param empCount an unused static variable that keeps track of the amount of employees.
+     */
     private int[] hours = new int[7];
-    private int totalHours;
-    public static int empCount;
+    public static int empCount = 0;
 
+    /** Default constructed employees work 8 hours Monday through Friday with weekends off. */
     public Employee() {
-        this.name = "John Doe";
-        this.empID = 2505314;
         this.hours[0] = 8;
         this.hours[1] = 8;
         this.hours[2] = 8;
@@ -21,33 +23,8 @@ public class Employee {
         empCount++;
     }
 
-    public Employee(String name, int totalHours) {
-        this.name = name;
-        this.totalHours = totalHours;
-        empCount++;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public int getEmpID() {
-        return this.empID;
-    }
-
-    public int[] getHours() {
-        return this.hours;
-    }
-
-    public int getTotalHours() {
-        int totalHours = 0;
-        for(int i = 0; i < this.hours.length; i++) {
-            totalHours += this.hours[i];
-        }
-        return totalHours;
-    }
-
-    public void setWeekHours(int monday, int tuesday, int wednesday, int thursday, int friday, int saturday, int sunday) {
+    /** Custom constructor allows the setting of how many hours an employee works every day of the week */
+    public Employee(int monday, int tuesday, int wednesday, int thursday, int friday, int saturday, int sunday) {
         this.hours[0] = monday;
         this.hours[1] = tuesday;
         this.hours[2] = wednesday;
@@ -55,30 +32,10 @@ public class Employee {
         this.hours[4] = friday;
         this.hours[5] = saturday;
         this.hours[6] = sunday;
+        empCount++;
     }
 
-    public static void sort(Employee[] empArray) {;
-        for(int x = 0; x < empArray.length; x++) {
-            Employee tempEmp = new Employee("", 0);
-            for(int y = x + 1; y < empArray.length; y++) {
-                if(empArray[y].getTotalHours() > empArray[x].getTotalHours()) {
-                    tempEmp = empArray[x];
-                    empArray[x] = empArray[y];
-                    empArray[y] = tempEmp;
-                }
-            }
-        }
-    }
+    /** Returns the 7-long array of the hours the employee worked each day of the week. */
+    public int[] getHours() { return this.hours; }
 
-    public void setDayHours(int day, int hours) {
-        this.hours[day] = hours;
-    }
-
-    public String displayWeek() {
-        String returnString = "";
-        for(int i = 0; i < this.hours.length; i++) {
-            returnString += (this.hours[i] + " ");
-        }
-        return returnString;
-    }
 }
